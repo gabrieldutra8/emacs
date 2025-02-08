@@ -41,12 +41,19 @@
   :ensure t
   :config (which-key-mode))
 
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(which-key try use-package)))
+ '(package-selected-packages '(auto-complete which-key try use-package)))
 
 ;;------- end package manager -------
 (custom-set-faces
