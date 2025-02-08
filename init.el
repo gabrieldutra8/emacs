@@ -19,6 +19,14 @@
 
 (set-face-attribute 'default nil :height 150)
 
+;; custom binds
+
+(global-set-key (kbd "M-<tab>") 'other-window)
+(global-set-key (kbd "M-<down>") 'enlarge-window)
+(global-set-key (kbd "M-<up>") 'shrink-window)
+(global-set-key (kbd "M-<left>") 'enlarge-window-horizontally)
+(global-set-key (kbd "M-<right>") 'shrink-window-horizontally)
+
 ;; package manager
 
 (require 'package)
@@ -48,17 +56,26 @@
     (ac-config-default)
     (global-auto-complete-mode t)))
 
+(use-package all-the-icons
+  :ensure t)
+
+(use-package neotree
+  :ensure t
+  :config
+  (progn
+    (setq neo-theme (if (display-graphic-p) 'icons 'arrow))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(auto-complete which-key try use-package)))
+ '(package-selected-packages '(neotree auto-complete which-key try use-package)))
 
 ;;------- end package manager -------
-(custom-set-faces
+;;(custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ ;;)
