@@ -1,3 +1,11 @@
+;; changing cursor shape
+
+(setq-default cursor-type 'bar)
+
+;; syntax highlight
+
+(setq font-lock-maximum-decoration t)
+
 ;; removing welcome message
 
 (setq inhibit-startup-message t)
@@ -77,6 +85,14 @@
   :ensure t
   :init (global-flycheck-mode t))
 
+(use-package lsp-mode
+  :commands lsp
+  :ensure t
+  :config (add-hook 'python-mode-hook #'lsp) )
+
+(use-package go-mode
+  :ensure t )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -86,7 +102,7 @@
  '(custom-safe-themes
    '("d5fd482fcb0fe42e849caba275a01d4925e422963d1cd165565b31d3f4189c87" "5a0ddbd75929d24f5ef34944d78789c6c3421aa943c15218bac791c199fc897d" "8363207a952efb78e917230f5a4d3326b2916c63237c1f61d7e5fe07def8d378" default))
  '(package-selected-packages
-   '(flycheck gruvbox-theme ace-window neotree auto-complete which-key try use-package)))
+   '(treesit-auto flycheck gruvbox-theme ace-window neotree auto-complete which-key try use-package)))
 
 ;;------- end package manager -------
 ;;(custom-set-faces
@@ -101,3 +117,20 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+;; golang setup
+(require 'lsp-mode)
+(require 'go-mode)
+
+(setq gofmt-command "goimports")
+
+(add-hook 'go-mode-hook 'lsp-deferred)
+(add-hook 'go-mode-hook 'subword-mode)
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+(add-hook 'go-mode-hook (lambda ()
+                          (setq tab-width 4)
+                          (flycheck-add-next-checker 'lsp 'go-vet)
+                          (flycheck-add-next-checker 'lsp 'go-staticcheck)))
+
