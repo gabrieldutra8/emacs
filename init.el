@@ -27,6 +27,9 @@
 
 (set-face-attribute 'default nil :height 150)
 
+;; stop creating backup
+(setq make-backup-files nil)
+
 ;; custom binds
 
 (global-set-key (kbd "M-<tab>") 'other-window)
